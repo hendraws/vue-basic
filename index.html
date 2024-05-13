@@ -5,26 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Belajar Vue</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        html,body{
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        .text-red {
+            color: red;
+        }
+
+        .text-green {
+            color: green;
+        }
+    </style>
   </head>
   <body>
     <div id="app">
-        <p>
-            <input type="text" v-model="message">
-        </p>
-        <div>{{ message }} {{ message.length }}</div>
+       <button :class="active ? 'text-green' : 'text-red'" @click="toggle">Click Me</button>
   </body>
   <script>
     Vue.createApp({
         data() {
             return {
-                message: 'Hello World!'
+                active: false
             }
         },
-        mounted(){
-            setTimeout(() => {
-                this.message = 'Hello Vue!'
-            }, 3000)
-        }
+        methods: {
+            toggle() {
+                this.active = !this.active
+            }
+        },
+        // mounted(){
+        //     setTimeout(() => {
+        //         this.message = 'Hello Vue!'
+        //     }, 3000)
+        // }
     }).mount('#app');
   </script>
 </html>
