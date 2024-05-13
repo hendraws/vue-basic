@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <p>
+            <input type="text" v-model="message">
+        </p>
+        <div>{{ message }} {{ message.length }}</div>
+  </body>
+  <script>
+    Vue.createApp({
+        data() {
+            return {
+                message: 'Hello World!'
+            }
+        },
+        mounted(){
+            setTimeout(() => {
+                this.message = 'Hello Vue!'
+            }, 3000)
+        }
+    }).mount('#app');
+  </script>
+</html>
