@@ -1,50 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Belajar Vue</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        html,body{
-            height: 100%;
-        }
+      html,
+      body {
+        height: 100%;
+      }
 
-        body {
-            display: grid;
-            place-items: center;
-        }
+      body {
+        display: grid;
+        place-items: center;
+      }
 
-        .text-red {
-            color: red;
-        }
+      .text-red {
+        color: red;
+      }
 
-        .text-green {
-            color: green;
-        }
+      .text-green {
+        color: green;
+      }
     </style>
   </head>
   <body>
     <div id="app">
-       <button :class="active ? 'text-green' : 'text-red'" @click="toggle">Click Me</button>
+      <section v-show="inProgressAssignments.length">
+        <h2>In Proggress</h2>
+        <ul>
+          <li v-for="assignment in inProgressAssignments" :key="assignment.id">
+            <label>
+              {{ assignment.name }}
+              <input type="checkbox" v-model="assignment.completed"/>
+            </label>
+          </li>
+        </ul>
+      </section>
+
+      <section v-show="completedAssignments.length">
+        <h2>Completed</h2>
+        <ul>
+          <li v-for="assignment in completedAssignments" :key="assignment.id">
+            <label>
+              {{ assignment.name }}
+              <input type="checkbox" v-model="assignment.completed"/>
+            </label>
+          </li>
+        </ul>
+      </section>
+      <!-- <pre>
+        {{ assignments }}
+      </pre> -->
+    </div>
   </body>
   <script>
-    Vue.createApp({
-        data() {
-            return {
-                active: false
-            }
+    let app = {
+      data() {
+        return {
+          assignments: [
+            { name: "Belajar Vue", completed: false, id:1 },
+            { name: "Belajar Vue 2", completed: false, id:2 },
+            { name: "Belajar Vue 3", completed: false, id:3 },
+          ],
+        };
+      },
+
+      computed: {
+        inProgressAssignments() {
+            return this.assignments.filter(assignment => !assignment.completed)
         },
-        methods: {
-            toggle() {
-                this.active = !this.active
-            }
-        },
-        // mounted(){
-        //     setTimeout(() => {
-        //         this.message = 'Hello Vue!'
-        //     }, 3000)
-        // }
-    }).mount('#app');
+        completedAssignments() {
+            return this.assignments.filter(assignment => assignment.completed)
+        }
+      }
+    };
+    Vue.createApp(app).mount("#app");
   </script>
 </html>
