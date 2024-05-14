@@ -1,82 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="h-">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Belajar Vue</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      html,
-      body {
-        height: 100%;
-      }
-
-      body {
-        display: grid;
-        place-items: center;
-      }
-
-      .text-red {
-        color: red;
-      }
-
-      .text-green {
-        color: green;
-      }
-    </style>
   </head>
-  <body>
-    <div id="app">
-      <section v-show="inProgressAssignments.length">
-        <h2>In Proggress</h2>
-        <ul>
-          <li v-for="assignment in inProgressAssignments" :key="assignment.id">
-            <label>
-              {{ assignment.name }}
-              <input type="checkbox" v-model="assignment.completed"/>
-            </label>
-          </li>
-        </ul>
-      </section>
-
-      <section v-show="completedAssignments.length">
-        <h2>Completed</h2>
-        <ul>
-          <li v-for="assignment in completedAssignments" :key="assignment.id">
-            <label>
-              {{ assignment.name }}
-              <input type="checkbox" v-model="assignment.completed"/>
-            </label>
-          </li>
-        </ul>
-      </section>
-      <!-- <pre>
-        {{ assignments }}
-      </pre> -->
-    </div>
+  <body class="h-full bg-gray-800 grid place-items-center text-white">
+    <div id="app"></div>
   </body>
-  <script>
-    let app = {
-      data() {
-        return {
-          assignments: [
-            { name: "Belajar Vue", completed: false, id:1 },
-            { name: "Belajar Vue 2", completed: false, id:2 },
-            { name: "Belajar Vue 3", completed: false, id:3 },
-          ],
-        };
-      },
+  <script type="module">
+    import App from './js/components/App.js';
 
-      computed: {
-        inProgressAssignments() {
-            return this.assignments.filter(assignment => !assignment.completed)
-        },
-        completedAssignments() {
-            return this.assignments.filter(assignment => assignment.completed)
-        }
-      }
-    };
-    Vue.createApp(app).mount("#app");
+    Vue.createApp(App).mount("#app");
   </script>
 </html>
